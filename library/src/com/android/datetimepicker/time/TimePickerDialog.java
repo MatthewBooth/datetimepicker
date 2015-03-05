@@ -134,21 +134,21 @@ public class TimePickerDialog extends DialogFragment implements OnValueSelectedL
     }
 
     public static TimePickerDialog newInstance(OnTimeSetListener callback,
-            int hourOfDay, int minute, boolean is24HourMode) {
+            int hourOfDay, int minute, boolean is24HourMode, boolean isDarkTheme) {
         TimePickerDialog ret = new TimePickerDialog();
-        ret.initialize(callback, hourOfDay, minute, is24HourMode);
+        ret.initialize(callback, hourOfDay, minute, is24HourMode, isDarkTheme);
         return ret;
     }
 
     public void initialize(OnTimeSetListener callback,
-            int hourOfDay, int minute, boolean is24HourMode) {
+            int hourOfDay, int minute, boolean is24HourMode, boolean isDarkTheme) {
         mCallback = callback;
 
         mInitialHourOfDay = hourOfDay;
         mInitialMinute = minute;
         mIs24HourMode = is24HourMode;
         mInKbMode = false;
-        mThemeDark = false;
+        mThemeDark = isDarkTheme;
     }
 
     /**
@@ -200,7 +200,7 @@ public class TimePickerDialog extends DialogFragment implements OnValueSelectedL
         mSelectHours = res.getString(R.string.select_hours);
         mMinutePickerDescription = res.getString(R.string.minute_picker_description);
         mSelectMinutes = res.getString(R.string.select_minutes);
-        mSelectedColor = res.getColor(mThemeDark? R.color.red : R.color.blue);
+        mSelectedColor = res.getColor(R.color.blue);
         mUnselectedColor = res.getColor(mThemeDark? R.color.white : R.color.numbers_text_color);
 
         mHourView = (TextView) view.findViewById(R.id.hours);
